@@ -30,12 +30,16 @@ const App = () => {
 
         <div className="container">
           <Routes>
-            <Route exact path="/">
-              {user ? <ChatRoomList user={user} /> : <AuthForm />}
-            </Route>
-            <Route path="/chatroom/:id">
-              {user ? <ChatRoom user={user} /> : <AuthForm />}
-            </Route>
+            <Route
+              exact
+              path="/"
+              element={user ? <ChatRoomList user={user} /> : <AuthForm />}
+            />
+
+            <Route
+              path="/chatroom/:id"
+              element={user ? <ChatRoom user={user} /> : <AuthForm />}
+            />
           </Routes>
         </div>
       </div>
