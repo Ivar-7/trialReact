@@ -1,57 +1,34 @@
-import React, { useState } from "react";
-import { auth } from "../firebaseConfig";
+import React from "react";
+import { auth, provider } from "../firebaseConfig";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-const AuthForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+function AuthForm() {
+  const [user, loading, error] = useAuthState(auth);
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const handleGoogleLogin = () => {
+    auth.signInWithPopup(provider);
   };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    auth.signInWithEmailAndPassword(email, password).catch((error) => {
-      setError(error.message);
-    });
-  };
-
-  const handleRegister = (e) => {
-    e.preventDefault();
-    auth.createUserWithEmailAndPassword(email, password).catch((error) => {
-      setError(error.message);
-    });
+  const handleLogout = () => {
+    auth.signOut();
   };
 
   return (
-    <div className="auth-form">
-      <h2>Login / Register</h2>
-      {error && <div className="error">{error}</div>}
-      <form>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        <div className="button-group">
-          <button onClick={handleLogin}>Login</button>
-          <button onClick={handleRegister}>Register</button>
-        </div>
-      </form>
+    <div>
+      <h1>Login</h1>
+      {loading ? (
+        <p>Loading...</p>
+      ) : user ? (
+        <>
+          <p>Welcome, {user.displayName}!</p>
+          <button onClick={handleLogout}>Sign Out</button>
+        </>
+      ) : (
+        <button onClick={handleGoogleLogin}>Sign in with Google</button>
+      )}
+      {error && <p>Error: {error.message}</p>}
     </div>
   );
-};
+}
 
 export default AuthForm;
