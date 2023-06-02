@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 
-const AuthForm = () => {
+function AuthForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -59,6 +59,6 @@ const AuthForm = () => {
       </form>
     </div>
   );
-};
+}
 
 export default AuthForm;
