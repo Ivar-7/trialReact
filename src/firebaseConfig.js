@@ -1,3 +1,5 @@
+import firebase from "firebase/app";
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -16,6 +18,7 @@ const firebaseConfig = {
   measurementId: "G-1PGQ48BW03",
 };
 
+firebase.initializeApp(firebaseConfig);
+
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
