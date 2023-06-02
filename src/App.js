@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import firebase from "firebase/app";
+import firebaseConfig from "./firebaseConfig";
 import "firebase/auth";
 
 // Import your custom components
@@ -8,11 +9,6 @@ import Header from "./components/Header";
 import ChatRoomList from "./components/ChatRoomList";
 import ChatRoom from "./components/ChatRoom";
 import AuthForm from "./components/AuthForm";
-
-// Configure your Firebase app
-const firebaseConfig = {
-  // Add your Firebase configuration details here
-};
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
