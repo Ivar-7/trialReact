@@ -1,13 +1,171 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* Header Component */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #f1f1f1;
+}
+
+/* AuthForm Component */
+.auth-form {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.auth-form button {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #f1f1f1;
+  border: none;
+  cursor: pointer;
+}
+
+/* ChatRoomList Component */
+.chat-room-list {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.chat-room-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chat-room-list li {
+  margin-bottom: 0.5rem;
+}
+
+.chat-room-list li a {
+  text-decoration: none;
+  color: #333;
+}
+
+/* ChatRoom Component */
+.chat-room {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.chat-room h2 {
+  margin-bottom: 1rem;
+}
+
+.chat-room .messages {
+  margin-bottom: 1rem;
+}
+
+.chat-room .message {
+  background-color: #f1f1f1;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.chat-room .sender {
+  font-weight: bold;
+}
+
+.chat-room .content {
+  margin-top: 0.25rem;
+}
+
+.chat-room .new-message-form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.chat-room .new-message-form button {
+  padding: 0.5rem;
+  background-color: #f1f1f1;
+  border: none;
+  cursor: pointer;
+}
+
+/* MessageList Component */
+.message-list {
+  margin-bottom: 1rem;
+}
+
+.message-list .message {
+  background-color: #f1f1f1;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.message-list .sender {
+  font-weight: bold;
+}
+
+.message-list .content {
+  margin-top: 0.25rem;
+}
+
+/* Message Component */
+.message {
+  background-color: #f1f1f1;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.message .sender {
+  font-weight: bold;
+}
+
+.message .content {
+  margin-top: 0.25rem;
+}
+
+/* NewMessageForm Component */
+.new-message-form {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.new-message-form input {
+  flex-grow: 1;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.new-message-form button {
+  padding: 0.5rem;
+  background-color: #f1f1f1;
+  border: none;
+  cursor: pointer;
+}
+
+/* UserStatus Component */
+.user-status {
+  margin-bottom: 1rem;
+}
+
+/* TypingIndicator Component */
+.typing-indicator {
+  margin-bottom: 1rem;
+}
+
+.typing-indicator p {
+  font-style: italic;
 }

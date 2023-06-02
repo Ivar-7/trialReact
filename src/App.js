@@ -1,45 +1,54 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import firebase from "firebase/app";
+import "firebase/auth";
 
-function App() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+// Import your custom components
+import Header from "./components/Header";
+import ChatRoomList from "./components/ChatRoomList";
+import ChatRoom from "./components/ChatRoom";
+import AuthForm from "./components/AuthForm";
+
+// Configure your Firebase app
+const firebaseConfig = {
+  // Add your Firebase configuration details here
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const App = () => {
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setLoading(false);
-      });
+    // Check if user is already authenticated
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  console.log(data);
   return (
-    <div>
-      {data.map((d) => (
-        <img src={d.image} alt="sorry" />
-      ))}
-    </div>
+    <Router>
+      <div className="app">
+        <Header user={user} />
+
+        <div className="container">
+          <Switch>
+            <Route exact path="/">
+              {user ? <ChatRoomList user={user} /> : <AuthForm />}
+            </Route>
+            <Route path="/chatroom/:id">
+              {user ? <ChatRoom user={user} /> : <AuthForm />}
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
