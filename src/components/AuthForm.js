@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import firebase from "firebase/app";
-import "firebase/auth";
+import { auth } from "../firebaseConfig";
 
 const AuthForm = () => {
   const [email, setEmail] = useState("");
@@ -17,22 +16,16 @@ const AuthForm = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch((error) => {
-        setError(error.message);
-      });
+    auth.signInWithEmailAndPassword(email, password).catch((error) => {
+      setError(error.message);
+    });
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .catch((error) => {
-        setError(error.message);
-      });
+    auth.createUserWithEmailAndPassword(email, password).catch((error) => {
+      setError(error.message);
+    });
   };
 
   return (

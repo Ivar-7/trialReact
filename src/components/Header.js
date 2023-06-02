@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import firebase from "firebase/app";
+import { auth } from "../firebaseConfig";
 import "firebase/auth";
 
 const Header = ({ user }) => {
   const handleLogout = () => {
-    firebase.auth().signOut();
+    auth.signOut();
   };
 
   return (

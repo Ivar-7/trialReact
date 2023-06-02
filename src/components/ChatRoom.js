@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import firebase from "firebase/app";
-import "firebase/database";
+import { database } from "../firebaseConfig";
 
 const ChatRoom = ({ user }) => {
   const { id } = useParams();
@@ -9,7 +8,7 @@ const ChatRoom = ({ user }) => {
   const [newMessage, setNewMessage] = useState("");
 
   useEffect(() => {
-    const chatRoomRef = firebase.database().ref(`chatRooms/${id}/messages`);
+    const chatRoomRef = database.ref(`chatRooms/${id}/messages`);
 
     // Fetch message data from Firebase Realtime Database
     chatRoomRef.on("value", (snapshot) => {
@@ -38,7 +37,7 @@ const ChatRoom = ({ user }) => {
     e.preventDefault();
 
     if (newMessage.trim() !== "") {
-      const chatRoomRef = firebase.database().ref(`chatRooms/${id}/messages`);
+      const chatRoomRef = database.ref(`chatRooms/${id}/messages`);
       const newMessageRef = chatRoomRef.push();
 
       newMessageRef.set({

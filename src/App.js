@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import firebase from "firebase/app";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { auth } from "./firebaseConfig";
 import "firebase/auth";
 
 // Import your custom components
@@ -14,7 +14,7 @@ const App = () => {
 
   useEffect(() => {
     // Check if user is already authenticated
-    firebase.auth().onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
       } else {
@@ -29,14 +29,14 @@ const App = () => {
         <Header user={user} />
 
         <div className="container">
-          <Switch>
+          <Routes>
             <Route exact path="/">
               {user ? <ChatRoomList user={user} /> : <AuthForm />}
             </Route>
             <Route path="/chatroom/:id">
               {user ? <ChatRoom user={user} /> : <AuthForm />}
             </Route>
-          </Switch>
+          </Routes>
         </div>
       </div>
     </Router>

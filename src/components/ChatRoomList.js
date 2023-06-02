@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import firebase from "firebase/app";
+import { database } from "../firebaseConfig";
 import "firebase/database";
 
 const ChatRoomList = ({ user }) => {
   const [chatRooms, setChatRooms] = useState([]);
 
   useEffect(() => {
-    const chatRoomsRef = firebase.database().ref("chatRooms");
+    const chatRoomsRef = database.ref("chatRooms");
 
     // Fetch chat room data from Firebase Realtime Database
     chatRoomsRef.on("value", (snapshot) => {
